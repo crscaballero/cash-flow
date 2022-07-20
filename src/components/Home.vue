@@ -7,7 +7,7 @@
 			<Resume
 				:totalLabel="'Total savings'"
 				:label="label"
-				:totalAmount="100000"
+				:totalAmount="totalAmount"
 				:amount="amount"
 			>
 				<template #graphic>
@@ -133,6 +133,11 @@ export default {
 					return sum + movement;
 				}, 0);
 			});
+		},
+		totalAmount() {
+			return this.movements.reduce((sum, m) => {
+				return sum + m.amount;
+			}, 0);
 		},
 	},
 	mounted() {
