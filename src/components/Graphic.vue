@@ -81,7 +81,7 @@ const tap = ({ target, touches }) => {
 	const elementX = target.getBoundingClientRect().x;
 	const touchX = touches[0].clientX;
 	pointer.value = ((touchX - elementX) * 300) / elementWidth;
-	emit('select');
+	// emit('select', );
 };
 
 const untap = () => (showPointer.value = false);

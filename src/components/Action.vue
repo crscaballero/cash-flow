@@ -61,8 +61,12 @@ const submit = () => {
 		description: description.value,
 		amount: movementType.value === 'Deposit' ? amount.value : -amount.value,
 		time: new Date(),
-		id: new Date(),
+		id: new Date(), // TODO: Update this to save an actual id instead of this
 	});
+	title.value = '';
+	description.value = '';
+	amount.value = 0;
+	movementType.value = 'Deposit';
 };
 </script>
 
