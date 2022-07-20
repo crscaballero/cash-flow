@@ -14,12 +14,12 @@
 					<Graphic :amounts="amounts" />
 				</template>
 				<template #action>
-					<Action />
+					<Action @create="create" />
 				</template>
 			</Resume>
 		</template>
 		<template #movements>
-			<Movements :movements="movements" />
+			<Movements :movements="movements" @remove="remove" />
 		</template>
 	</Layout>
 </template>
@@ -44,70 +44,105 @@ export default {
 		return {
 			label: null,
 			amount: null,
-			amounts: [100, 200, 500, 200, -400, -600, -300, 0, 300, 500],
 			movements: [
 				{
 					id: 0,
-					title: 'Movement',
-					description: 'Salary deposit',
-					amount: 1000,
+					title: 'Movement 1',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 100,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 1,
-					title: 'Movement 1',
-					description: 'Deposit of fees',
-					amount: 500,
+					title: 'Movement 2',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 200,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 2,
-					title: 'Movement 2',
-					description: 'Food',
-					amount: -100,
+					title: 'Movement 3',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 500,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 3,
-					title: 'Movement 3',
-					description: 'Tuition',
-					amount: 1000,
+					title: 'Movement 4',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 200,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 4,
-					title: 'Movement 4',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 5',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: -400,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 5,
-					title: 'Movement 5',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 6',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: -600,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 6,
-					title: 'Movement 6',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 7',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: -300,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 7,
-					title: 'Movement 7',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 8',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 100,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 8,
-					title: 'Movement 8',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 9',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 300,
+					time: new Date('07-01-2022'),
 				},
 				{
 					id: 9,
-					title: 'Movement 9',
-					description: 'Computer repair',
-					amount: 1000,
+					title: 'Movement 10',
+					description: 'Lorem ipsum dolor sit amet',
+					amount: 500,
+					time: new Date('01-01-2022'),
 				},
 			],
 		};
+	},
+	computed: {
+		amounts() {
+			const lastDays = this.movements
+				.filter(m => {
+					const today = new Date();
+					const oldDate = today.setDate(today.getDate() - 30);
+					return m.time >= oldDate;
+				})
+				.map(m => m.amount);
+			return lastDays.map((m, i) => {
+				const lastMovements = lastDays.slice(0, i);
+				return lastMovements.reduce((sum, movement) => {
+					return sum + movement;
+				}, 0);
+			});
+		},
+	},
+	methods: {
+		create(movement) {
+			this.movements.push(movement);
+		},
+		remove(id) {
+			const index = this.movements.findIndex(m => m.id === id);
+			this.movements.splice(index, 1);
+		},
 	},
 };
 </script>
