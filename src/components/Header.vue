@@ -36,4 +36,7 @@ h1 {
 h1 span {
 	color: var(--brand-green);
 }
+img {
+	cursor: pointer;
+}
 </style>
