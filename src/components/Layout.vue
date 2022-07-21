@@ -10,6 +10,7 @@
 			<div class="grip"></div>
 		</div>
 		<div class="body" v-show="showMovements">
+			asdasd
 			<slot name="movements"></slot>
 		</div>
 	</div>

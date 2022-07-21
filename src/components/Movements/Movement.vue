@@ -75,6 +75,7 @@ h4 {
 }
 .movement .action img {
 	margin-bottom: 16px;
+	cursor: pointer;
 }
 .red {
 	color: red;
